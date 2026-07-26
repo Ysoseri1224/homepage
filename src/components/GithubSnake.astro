@@ -1,0 +1,29 @@
+---
+---
+
+<div class="github-snake mt-8">
+  <img
+    class="snake-light w-full"
+    src="/github-snake-light.svg"
+    alt="GitHub Contribution Snake"
+    loading="lazy"
+  />
+  <img
+    class="snake-dark w-full hidden"
+    src="/github-snake-dark.svg"
+    alt="GitHub Contribution Snake"
+    loading="lazy"
+  />
+</div>
+
+<script is:inline>
+  (function () {
+    function updateSnakeTheme() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      document.querySelectorAll('.snake-light').forEach(el => el.style.display = isDark ? 'none' : 'block');
+      document.querySelectorAll('.snake-dark').forEach(el => el.style.display = isDark ? 'block' : 'none');
+    }
+    updateSnakeTheme();
+    new MutationObserver(updateSnakeTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>

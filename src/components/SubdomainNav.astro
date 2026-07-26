@@ -1,0 +1,47 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const items = [
+  { name: lang === 'zh' ? '情侣空间' : 'Couple', url: 'https://luckyrong.ysoseri.us', active: true },
+  { name: lang === 'zh' ? '博客' : 'Blog', url: 'https://blog.ysoseri.us', active: false },
+  { name: lang === 'zh' ? '工具' : 'Tools', url: 'https://tools.ysoseri.us', active: false },
+];
+---
+
+<div class="subdomain-nav relative">
+  <button
+    class="w-8 h-8 flex items-center justify-center rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors duration-150 text-lg leading-none tracking-tighter"
+    aria-label="站点导航"
+  >
+    ···
+  </button>
+  <div class="subdomain-panel absolute top-full right-0 mt-2 py-2 px-3 min-w-[140px] rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] opacity-0 scale-95 pointer-events-none transition-all duration-200">
+    {items.map((item) => (
+      item.active ? (
+        <a
+          href={item.url}
+          class="block py-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+        >
+          {item.name}
+        </a>
+      ) : (
+        <span class="block py-1.5 text-sm text-[var(--color-text-muted)] cursor-default">
+          {item.name} <span class="text-xs opacity-60">soon</span>
+        </span>
+      )
+    ))}
+  </div>
+</div>
+
+<style>
+  .subdomain-nav:hover .subdomain-panel,
+  .subdomain-nav:focus-within .subdomain-panel {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Identity from '../../components/Identity.astro';
+import ProjectCard from '../../components/react/ProjectCard';
+import AnimatedSection from '../../components/react/AnimatedSection';
+import RecentCommits from '../../components/react/RecentCommits';
+import en from '../../i18n/en';
+---
+
+<Layout title={en.title} lang="en">
+  <main class="mx-auto max-w-3xl px-6">
+    <Identity lang="en" />
+
+    <!-- Projects -->
+    <section class="pb-16">
+      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
+        {en.projects.heading}
+      </h2>
+      <div class="space-y-1">
+        {en.projects.items.map((project, i) => (
+          <AnimatedSection client:visible delay={i * 0.06}>
+            <ProjectCard
+              client:visible
+              name={project.name}
+              description={project.description}
+              tags={project.tags}
+              url={project.url}
+            />
+          </AnimatedSection>
+        ))}
+      </div>
+    </section>
+
+    <!-- Recent Activity -->
+    <section class="pb-20">
+      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
+        {en.commits.heading}
+      </h2>
+      <RecentCommits client:visible lang="en" />
+    </section>
+  </main>
+</Layout>

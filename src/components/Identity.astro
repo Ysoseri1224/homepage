@@ -1,0 +1,45 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+
+const content = {
+  zh: {
+    name: '小轩',
+    lines: [
+      '在奥克兰写代码、读研、偶尔发呆。',
+      '做一些有趣的和没用的东西。',
+      '相信好的工具应该是安静的。',
+    ],
+    status: '奥克兰 · 新西兰',
+    role: '信息技术硕士在读',
+  },
+  en: {
+    name: 'Aaron',
+    lines: [
+      'Writing code, doing grad school, sometimes staring into space. Auckland.',
+      'Building things that are interesting or useless or both.',
+      'Believe good tools should be quiet.',
+    ],
+    status: 'Auckland · New Zealand',
+    role: 'Master of Information Technology',
+  },
+};
+
+const c = content[lang as keyof typeof content] || content.zh;
+---
+
+<section class="pt-32 pb-20 px-6 max-w-3xl">
+  <h1 class="font-serif text-3xl md:text-4xl font-normal text-[var(--color-text)] mb-6">
+    {c.name}
+  </h1>
+  <div class="space-y-1.5 text-[var(--color-text-secondary)] leading-relaxed">
+    {c.lines.map((line) => <p>{line}</p>)}
+  </div>
+  <div class="mt-8 flex flex-col gap-1 text-sm text-[var(--color-text-muted)]">
+    <span>{c.status}</span>
+    <span>{c.role}</span>
+  </div>
+</section>

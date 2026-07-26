@@ -1,0 +1,1 @@
+import{j as n}from"./jsx-runtime.D_zvdyIk.js";import{m as r}from"./react.CkMTjMRH.js";import"./index.qNTDzdXh.js";function m({children:i,delay:t=0,className:o}){return n.jsx(r.div,{initial:{opacity:0,y:8},whileInView:{opacity:1,y:0},viewport:{once:!0,margin:"-50px"},transition:{type:"spring",duration:.7,delay:t},className:o,children:i})}export{m as default};

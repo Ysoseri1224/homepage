@@ -1,0 +1,33 @@
+name: Generate Snake
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  snake:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: Ysoseri1224
+          outputs: |
+            dist/github-snake-light.svg?color_snake=#e8734a&color_dots=#f5f2ed,#e8d5c4,#d4a574,#b8764a,#8b5a2e
+            dist/github-snake-dark.svg?color_snake=#f0855e&color_dots=#2a231c,#3d2e1f,#5a4535,#7a5c42,#a07850
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit SVGs
+        run: |
+          cp dist/github-snake-light.svg public/github-snake-light.svg
+          cp dist/github-snake-dark.svg public/github-snake-dark.svg
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/github-snake-*.svg
+          git diff --staged --quiet || git commit -m "chore: update snake SVGs"
+          git push

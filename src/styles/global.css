@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/fonts/geist-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root,
+[data-theme='light'] {
+  --color-bg: #faf8f5;
+  --color-bg-card: #f5f2ed;
+  --color-text: #3d2e1f;
+  --color-text-secondary: #6b5a4a;
+  --color-text-muted: #9b8a7a;
+  --color-border: rgba(61, 46, 31, 0.08);
+  --color-accent: #e8734a;
+  --color-accent-hover: #d4623b;
+  --noise-opacity: 0.03;
+}
+
+[data-theme='dark'] {
+  --color-bg: #1f1a15;
+  --color-bg-card: #2a231c;
+  --color-text: #f0ebe5;
+  --color-text-secondary: #c9bfb3;
+  --color-text-muted: #8a7e72;
+  --color-border: rgba(240, 235, 229, 0.08);
+  --color-accent: #f0855e;
+  --color-accent-hover: #f79a78;
+  --noise-opacity: 0.04;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Geist', 'Noto Sans SC', sans-serif;
+  line-height: 1.7;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

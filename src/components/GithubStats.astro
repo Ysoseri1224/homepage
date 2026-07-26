@@ -1,0 +1,41 @@
+---
+interface Props {
+  lang: string;
+}
+
+const { lang } = Astro.props;
+const username = 'Ysoseri1224';
+const lightParams = `username=${username}&show_icons=true&hide_border=true&bg_color=f5f2ed&title_color=3d2e1f&text_color=6b5a4a&icon_color=e8734a`;
+const darkParams = `username=${username}&show_icons=true&hide_border=true&bg_color=2a231c&title_color=f0ebe5&text_color=c9bfb3&icon_color=f0855e`;
+---
+
+<div class="github-stats">
+  <img
+    class="stats-light rounded-xl"
+    src={`https://github-readme-stats.vercel.app/api?${lightParams}`}
+    alt="GitHub Stats"
+    loading="lazy"
+    width="400"
+    height="150"
+  />
+  <img
+    class="stats-dark rounded-xl hidden"
+    src={`https://github-readme-stats.vercel.app/api?${darkParams}`}
+    alt="GitHub Stats"
+    loading="lazy"
+    width="400"
+    height="150"
+  />
+</div>
+
+<script is:inline>
+  (function () {
+    function updateStatsTheme() {
+      const isDark = document.documentElement.dataset.theme === 'dark';
+      document.querySelectorAll('.stats-light').forEach(el => el.style.display = isDark ? 'none' : 'block');
+      document.querySelectorAll('.stats-dark').forEach(el => el.style.display = isDark ? 'block' : 'none');
+    }
+    updateStatsTheme();
+    new MutationObserver(updateStatsTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  })();
+</script>
