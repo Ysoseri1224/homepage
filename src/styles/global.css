@@ -2,7 +2,7 @@
   --bg:#f5f0e8;--sf:#ede8df;--sf2:#e6e0d6;
   --bd:rgba(60,45,30,0.09);--bdh:rgba(60,45,30,0.20);
   --t1:#2a221a;--t2:#7a6a58;--t3:#b0a090;
-  --ac:#c4603a;--acm:rgba(196,96,58,0.08);
+  --ac:#b8522e;--acm:rgba(184,82,46,0.08);
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   --sp:cubic-bezier(0.34,1.56,0.64,1);
   --eo:cubic-bezier(0.16,1,0.3,1);
@@ -11,7 +11,7 @@
   --bg:#1c1713;--sf:#251f18;--sf2:#2e261e;
   --bd:rgba(255,235,210,0.07);--bdh:rgba(255,235,210,0.16);
   --t1:#f0e8dc;--t2:#a89880;--t3:#6a5a48;
-  --ac:#e07050;--acm:rgba(224,112,80,0.10);
+  --ac:#d45e3a;--acm:rgba(212,94,58,0.10);
 }
 .hero-desc,.md-content p,.md-content li,.blog-title,.commit-msg,.hero-name{
   transition:color .15s ease;
