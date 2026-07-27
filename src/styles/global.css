@@ -6,7 +6,6 @@
   --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   --sp:cubic-bezier(0.34,1.56,0.64,1);
   --eo:cubic-bezier(0.16,1,0.3,1);
-  --mx:-9999px;--my:-9999px;
 }
 [data-theme="dark"]{
   --bg:#1c1713;--sf:#251f18;--sf2:#2e261e;
@@ -14,19 +13,11 @@
   --t1:#f0e8dc;--t2:#a89880;--t3:#6a5a48;
   --ac:#e07050;--acm:rgba(224,112,80,0.10);
 }
-.hero-desc,.md-content p,.md-content li,.blog-title,.commit-msg{
-  background-image:radial-gradient(circle 40px at var(--mx) var(--my), var(--ac), var(--t2) 40px);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-attachment:fixed;
+.hero-desc,.md-content p,.md-content li,.blog-title,.commit-msg,.hero-name{
+  transition:color .15s ease;
 }
-.hero-name{
-  background-image:radial-gradient(circle 40px at var(--mx) var(--my), var(--ac), var(--t1) 40px);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-attachment:fixed;
+.hero-desc.glow,.md-content p.glow,.md-content li.glow,.blog-title.glow,.commit-msg.glow,.hero-name.glow{
+  color:var(--ac);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}

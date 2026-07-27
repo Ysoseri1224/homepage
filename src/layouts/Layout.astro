@@ -77,9 +77,22 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
         mx=e.clientX; my=e.clientY;
         dot.style.left=mx+'px'; dot.style.top=my+'px';
         spot.style.left=mx+'px'; spot.style.top=my+'px';
-        document.documentElement.style.setProperty('--mx',mx+'px');
-        document.documentElement.style.setProperty('--my',my+'px');
       });
+
+      var glowEls=document.querySelectorAll('.hero-desc,.hero-name,.md-content p,.md-content li,.blog-title,.commit-msg');
+      var glowR=40;
+      function updateGlow(){
+        for(var i=0;i<glowEls.length;i++){
+          var r=glowEls[i].getBoundingClientRect();
+          var cx=Math.max(r.left,Math.min(mx,r.right));
+          var cy=Math.max(r.top,Math.min(my,r.bottom));
+          var dist=Math.sqrt((mx-cx)*(mx-cx)+(my-cy)*(my-cy));
+          if(dist<glowR) glowEls[i].classList.add('glow');
+          else glowEls[i].classList.remove('glow');
+        }
+        requestAnimationFrame(updateGlow);
+      }
+      updateGlow();
 
       function lerp(a,b,t){return a+(b-a)*t;}
       (function anim(){
