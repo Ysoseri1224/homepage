@@ -80,15 +80,34 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
       });
 
       var glowEls=document.querySelectorAll('.hero-desc,.hero-name,.md-content p,.md-content li,.blog-title,.commit-msg');
-      var glowR=80;
+      var glowR=50;
+      var glowSpans=[];
+      glowEls.forEach(function(el){
+        var nodes=[];
+        el.childNodes.forEach(function(n){
+          if(n.nodeType===3){
+            var txt=n.textContent;
+            var frag=document.createDocumentFragment();
+            for(var i=0;i<txt.length;i++){
+              var s=document.createElement('span');
+              s.textContent=txt[i];
+              s.className='gc';
+              frag.appendChild(s);
+            }
+            nodes.push({old:n,frag:frag});
+          }
+        });
+        nodes.forEach(function(o){el.replaceChild(o.frag,o.old);});
+        el.querySelectorAll('.gc').forEach(function(s){glowSpans.push(s);});
+      });
       function updateGlow(){
-        for(var i=0;i<glowEls.length;i++){
-          var r=glowEls[i].getBoundingClientRect();
-          var cx=Math.max(r.left,Math.min(mx,r.right));
-          var cy=Math.max(r.top,Math.min(my,r.bottom));
-          var dist=Math.sqrt((mx-cx)*(mx-cx)+(my-cy)*(my-cy));
-          if(dist<glowR) glowEls[i].classList.add('glow');
-          else glowEls[i].classList.remove('glow');
+        for(var i=0;i<glowSpans.length;i++){
+          var r=glowSpans[i].getBoundingClientRect();
+          var cx2=r.left+r.width/2;
+          var cy2=r.top+r.height/2;
+          var dist=Math.sqrt((mx-cx2)*(mx-cx2)+(my-cy2)*(my-cy2));
+          if(dist<glowR) glowSpans[i].classList.add('glow');
+          else glowSpans[i].classList.remove('glow');
         }
         requestAnimationFrame(updateGlow);
       }

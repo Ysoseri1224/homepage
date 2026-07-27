@@ -16,9 +16,8 @@
 .hero-desc,.md-content p,.md-content li,.blog-title,.commit-msg,.hero-name{
   transition:color .15s ease;
 }
-.hero-desc.glow,.md-content p.glow,.md-content li.glow,.blog-title.glow,.commit-msg.glow,.hero-name.glow{
-  color:var(--ac);
-}
+.gc{transition:color .12s ease;}
+.gc.glow{color:var(--ac);}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 body{cursor:none;font-family:'Inter',sans-serif;background:var(--bg);background-image:var(--noise);color:var(--t1);min-height:100vh;padding:0 0 4rem;}
