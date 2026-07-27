@@ -135,8 +135,8 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
       })();
 
       document.querySelectorAll('p,li,.hero-desc,.hero-name,.commit-msg,.blog-title,.ql-text,.flyout-name').forEach(function(el){
-        el.addEventListener('mouseenter',function(){cursor.classList.add('on-text');});
-        el.addEventListener('mouseleave',function(){cursor.classList.remove('on-text');});
+        el.addEventListener('mouseenter',function(){cursor.classList.add('on-text');dot.classList.add('on-text');});
+        el.addEventListener('mouseleave',function(){cursor.classList.remove('on-text');dot.classList.remove('on-text');});
       });
       document.querySelectorAll('a,button,.dots-trigger,.commit-item,.avatar').forEach(function(el){
         el.addEventListener('mouseenter',function(){cursor.classList.add('on-link');});
