@@ -82,12 +82,12 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
       var glowEls=document.querySelectorAll('.page-wrap, nav, .page-footer');
       var glowR=40;
       var glowSpans=[];
-      glowEls.forEach(function(el){
-        var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+      function splitText(root){
+        var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
         var textNodes=[];
         while(walker.nextNode()) textNodes.push(walker.currentNode);
         textNodes.forEach(function(n){
-          if(!n.textContent.trim()) return;
+          if(!n.textContent.trim()||n.parentNode.classList.contains('gc')) return;
           var frag=document.createDocumentFragment();
           for(var i=0;i<n.textContent.length;i++){
             var s=document.createElement('span');
@@ -98,7 +98,15 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
           }
           n.parentNode.replaceChild(frag,n);
         });
-      });
+      }
+      glowEls.forEach(function(el){splitText(el);});
+      new MutationObserver(function(muts){
+        muts.forEach(function(m){
+          m.addedNodes.forEach(function(n){
+            if(n.nodeType===1) splitText(n);
+          });
+        });
+      }).observe(document.querySelector('.page-wrap'),{childList:true,subtree:true});
       function updateGlow(){
         for(var i=0;i<glowSpans.length;i++){
           var r=glowSpans[i].getBoundingClientRect();
