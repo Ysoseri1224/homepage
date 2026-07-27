@@ -24,6 +24,7 @@ jobs:
 
       - name: Commit SVGs
         run: |
+          mkdir -p public
           cp dist/github-snake-light.svg public/github-snake-light.svg
           cp dist/github-snake-dark.svg public/github-snake-dark.svg
           git config user.name "github-actions[bot]"
