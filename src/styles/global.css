@@ -14,9 +14,15 @@
   --t1:#f0e8dc;--t2:#a89880;--t3:#6a5a48;
   --ac:#e07050;--acm:rgba(224,112,80,0.10);
 }
-.text-glow,
-.hero-desc,.hero-name,.md-content p,.md-content li,.blog-title,.commit-msg{
-  background-image:radial-gradient(circle 80px at var(--mx) var(--my), var(--ac), transparent 80px);
+.hero-desc,.md-content p,.md-content li,.blog-title,.commit-msg{
+  background-image:radial-gradient(circle 40px at var(--mx) var(--my), var(--ac), var(--t2) 40px);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-attachment:fixed;
+}
+.hero-name{
+  background-image:radial-gradient(circle 40px at var(--mx) var(--my), var(--ac), var(--t1) 40px);
   -webkit-background-clip:text;
   background-clip:text;
   -webkit-text-fill-color:transparent;
