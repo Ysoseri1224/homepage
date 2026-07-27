@@ -18,6 +18,8 @@
 }
 .gc{transition:color .12s ease;}
 .gc.glow{color:var(--ac);}
+.md-content a{color:var(--t2);text-decoration:none;transition:color .15s;}
+.md-content a:hover{color:var(--ac);}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 body{cursor:none;font-family:'Inter',sans-serif;background:var(--bg);background-image:var(--noise);color:var(--t1);min-height:100vh;padding:0 0 4rem;}
