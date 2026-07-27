@@ -68,7 +68,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.6rem
 .snake-ph-label{font-size:12.5px;color:var(--t3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.9rem;}
 .snake-ph-desc{font-size:14px;color:var(--t3);line-height:1.7;margin-bottom:1rem;}
 .snake-ph-inner{border:0.5px dashed var(--bdh);border-radius:8px;height:100px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--t3);font-style:italic;}
-.snake-img{width:100%;border-radius:8px;}
+.snake-img{width:100%;border-radius:8px;background:var(--sf);padding:4px;}
 
 /* main grid */
 .main-grid{display:grid;grid-template-columns:1fr 260px;gap:4rem;}

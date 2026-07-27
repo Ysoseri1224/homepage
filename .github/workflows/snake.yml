@@ -18,7 +18,7 @@ jobs:
           github_user_name: Ysoseri1224
           outputs: |
             dist/github-snake-light.svg?color_snake=#e8734a&color_dots=#f5f2ed,#e8d5c4,#d4a574,#b8764a,#8b5a2e
-            dist/github-snake-dark.svg?color_snake=#f0855e&color_dots=#2a231c,#3d2e1f,#5a4535,#7a5c42,#a07850
+            dist/github-snake-dark.svg?color_snake=#e07050&color_dots=#251f18,#3d2e1f,#6a5a48,#a07850,#c8a060
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
