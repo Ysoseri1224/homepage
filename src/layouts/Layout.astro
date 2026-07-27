@@ -64,7 +64,7 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
 
     <footer class="page-footer">
       <div class="footer-copy">© 2026 · ysoseri.us</div>
-      <div class="footer-copy">Built on Cloudflare</div>
+      <div class="footer-copy">{lang === 'zh' ? '构建于 Cloudflare' : 'Built on Cloudflare'}</div>
     </footer>
 
     <script is:inline>
@@ -106,7 +106,18 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
         const t=document.documentElement.dataset.theme==='dark'?'light':'dark';
         document.documentElement.dataset.theme=t;
         localStorage.setItem('theme',t);
+        document.querySelectorAll('.snake-img[data-light][data-dark]').forEach(function(img){
+          img.src=t==='dark'?img.dataset.dark:img.dataset.light;
+        });
       });
+
+      // 初始化 snake SVG 匹配当前主题
+      (function(){
+        var t=document.documentElement.dataset.theme;
+        document.querySelectorAll('.snake-img[data-light][data-dark]').forEach(function(img){
+          img.src=t==='dark'?img.dataset.dark:img.dataset.light;
+        });
+      })();
     </script>
   </body>
 </html>

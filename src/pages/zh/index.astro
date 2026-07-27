@@ -22,7 +22,7 @@ import RecentCommits from '../../components/react/RecentCommits';
       </div>
 
       <div class="commit-panel">
-        <div class="panel-label">Recent commits</div>
+        <div class="panel-label">最近提交</div>
         <RecentCommits client:visible />
       </div>
     </div>
@@ -30,31 +30,28 @@ import RecentCommits from '../../components/react/RecentCommits';
     <!-- snake contribution -->
     <div class="snake-section">
       <div class="snake-ph">
-        <div class="snake-ph-label">Contributions</div>
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="/github-snake-dark.svg" />
-          <img class="snake-img" src="/github-snake-light.svg" alt="GitHub contribution snake" onerror="this.parentElement.parentElement.innerHTML='<div class=\'snake-ph-inner\'>贡献动画生成中……</div>'" />
-        </picture>
+        <div class="snake-ph-label">贡献</div>
+        <img class="snake-img" src="/github-snake-light.svg" alt="GitHub 贡献蛇" data-light="/github-snake-light.svg" data-dark="/github-snake-dark.svg" onerror="this.parentElement.innerHTML='<div class=\'snake-ph-inner\'>贡献动画生成中……</div>'" />
       </div>
     </div>
 
     <!-- main grid: md-area + sidebar -->
     <div class="main-grid">
       <div class="md-area">
-        <div class="panel-label" style="margin-bottom:1.25rem">About</div>
+        <div class="panel-label" style="margin-bottom:1.25rem">关于</div>
         <div class="md-content">
-          <h2>Background</h2>
+          <h2>背景</h2>
           <p>奇鲁师范大学计算机科学与技术（师范）本科毕业，现于奥克兰大学攻读信息技术硕士（GPA 5.75）。主修方向涵盖网络安全与隐私工程、机器学习、软件工程。</p>
-          <h2>Currently</h2>
+          <h2>近况</h2>
           <p>奥克兰大学在读研究生，同时维护若干个人项目。计划毕业后留在新西兰或前往其他英语系城市从事全栈/安全相关工作。</p>
-          <h2>Technical</h2>
+          <h2>技术栈</h2>
           <ul>
             <li>全栈开发：MERN stack、FastAPI、Django、Flask；完整交付能力，从需求到部署</li>
             <li>网络安全：全国大学生信息安全竞赛一等奖（2023）；Web 漏洞分析、渗透测试、网络防御</li>
             <li>数据库：MySQL、PostgreSQL、SQLite、MongoDB、Oracle；关系型与非关系型均熟悉</li>
             <li>AI 辅助开发：Windsurf、Cursor、Claude、ChatGPT；AI 加速全栈交付与调试</li>
           </ul>
-          <h2>Selected projects</h2>
+          <h2>项目</h2>
           <ul>
             <li><code>course-schedule</code> — 为 IELTS 培训机构独立交付的全栈排课系统（MERN）</li>
             <li><code>CET-6-training-camp</code> — 六级词汇训练营，Vite + React，部署于 CF Pages</li>
@@ -67,14 +64,14 @@ import RecentCommits from '../../components/react/RecentCommits';
 
       <div class="sidebar">
         <div>
-          <div class="sb-label">Latest post</div>
+          <div class="sb-label">最新文章</div>
           <a class="blog-card" href="https://blog.ysoseri.us" target="_blank">
             <div class="blog-title">博客建设中……</div>
-            <div class="blog-date">blog.ysoseri.us · soon</div>
+            <div class="blog-date">blog.ysoseri.us · 敬请期待</div>
           </a>
         </div>
         <div>
-          <div class="sb-label">Quick access</div>
+          <div class="sb-label">快速访问</div>
           <div class="quick-links">
             <a class="quick-link ql-accent" href="https://github.com/Ysoseri1224" target="_blank">
               <span class="ql-text">GitHub</span><span class="ql-arr">↗</span>

@@ -31,10 +31,7 @@ import RecentCommits from '../../components/react/RecentCommits';
     <div class="snake-section">
       <div class="snake-ph">
         <div class="snake-ph-label">Contributions</div>
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="/github-snake-dark.svg" />
-          <img class="snake-img" src="/github-snake-light.svg" alt="GitHub contribution snake" onerror="this.parentElement.parentElement.innerHTML='<div class=\'snake-ph-inner\'>Loading contribution graph…</div>'" />
-        </picture>
+        <img class="snake-img" src="/github-snake-light.svg" alt="GitHub contribution snake" data-light="/github-snake-light.svg" data-dark="/github-snake-dark.svg" onerror="this.parentElement.innerHTML='<div class=\'snake-ph-inner\'>Loading contribution graph…</div>'" />
       </div>
     </div>
 
