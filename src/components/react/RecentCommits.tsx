@@ -21,19 +21,15 @@ export default function RecentCommits() {
   const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('https://api.github.com/users/Ysoseri1224/events?per_page=30')
+    fetch('/api/commits')
       .then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); })
-      .then((events: any[]) => {
-        if (!Array.isArray(events)) throw new Error('not array');
-        const items: Commit[] = [];
-        for (const ev of events) {
-          if (ev.type !== 'PushEvent') continue;
-          for (const c of (ev.payload?.commits || [])) {
-            items.push({ msg: c.message.split('\n')[0], repo: ev.repo.name.split('/')[1], ago: timeAgo(ev.created_at) });
-            if (items.length >= 4) break;
-          }
-          if (items.length >= 4) break;
-        }
+      .then((data: unknown) => {
+        if (!Array.isArray(data)) throw new Error('not array');
+        const items: Commit[] = data.map((c: { msg: string; repo: string; time: string }) => ({
+          msg: c.msg,
+          repo: c.repo,
+          ago: timeAgo(c.time),
+        }));
         setCommits(items);
       })
       .catch(() => setCommits([]))
@@ -69,8 +65,8 @@ export default function RecentCommits() {
     return (
       <div className="commit-list">
         <div className="commit-item">
-          <div className="commit-msg">rate limited</div>
-          <div className="commit-meta">GitHub API 60/hr · try later</div>
+          <div className="commit-msg">no recent activity</div>
+          <div className="commit-meta">check back later</div>
         </div>
       </div>
     );
