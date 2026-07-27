@@ -103,7 +103,10 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
       new MutationObserver(function(muts){
         muts.forEach(function(m){
           m.addedNodes.forEach(function(n){
-            if(n.nodeType===1) splitText(n);
+            if(n.nodeType===1){
+              if(n.classList&&n.classList.contains('gc')) glowSpans.push(n);
+              else n.querySelectorAll&&n.querySelectorAll('.gc').forEach(function(s){glowSpans.push(s);});
+            }
           });
         });
       }).observe(document.querySelector('.page-wrap'),{childList:true,subtree:true});

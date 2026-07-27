@@ -76,8 +76,8 @@ export default function RecentCommits() {
     <div className="commit-list" ref={listRef}>
       {commits.map((c, i) => (
         <div key={i} className="commit-item">
-          <div className="commit-msg">{c.msg}</div>
-          <div className="commit-meta">{c.ago} · {c.repo}</div>
+          <div className="commit-msg">{c.msg.split('').map((ch, j) => <span key={j} className="gc">{ch}</span>)}</div>
+          <div className="commit-meta">{(c.ago + ' · ' + c.repo).split('').map((ch, j) => <span key={j} className="gc">{ch}</span>)}</div>
         </div>
       ))}
     </div>
