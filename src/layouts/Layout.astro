@@ -77,6 +77,8 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
         mx=e.clientX; my=e.clientY;
         dot.style.left=mx+'px'; dot.style.top=my+'px';
         spot.style.left=mx+'px'; spot.style.top=my+'px';
+        document.documentElement.style.setProperty('--mx',mx+'px');
+        document.documentElement.style.setProperty('--my',my+'px');
       });
 
       function lerp(a,b,t){return a+(b-a)*t;}
