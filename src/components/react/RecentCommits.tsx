@@ -22,8 +22,9 @@ export default function RecentCommits() {
 
   useEffect(() => {
     fetch('https://api.github.com/users/Ysoseri1224/events?per_page=30')
-      .then(r => r.json())
+      .then(r => { if (!r.ok) throw new Error(`${r.status}`); return r.json(); })
       .then((events: any[]) => {
+        if (!Array.isArray(events)) throw new Error('not array');
         const items: Commit[] = [];
         for (const ev of events) {
           if (ev.type !== 'PushEvent') continue;
@@ -68,8 +69,8 @@ export default function RecentCommits() {
     return (
       <div className="commit-list">
         <div className="commit-item">
-          <div className="commit-msg">···</div>
-          <div className="commit-meta">no recent activity</div>
+          <div className="commit-msg">rate limited</div>
+          <div className="commit-meta">GitHub API 60/hr · try later</div>
         </div>
       </div>
     );
