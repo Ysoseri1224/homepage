@@ -134,12 +134,20 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
         requestAnimationFrame(anim);
       })();
 
-      var textEls='p,li,.hero-desc,.hero-name,.commit-msg,.blog-title,.ql-text,.flyout-name,.hero-tag';
       document.addEventListener('mouseover',function(e){
-        if(e.target.closest(textEls)){cursor.classList.add('on-text');dot.classList.add('on-text');}
+        var t=e.target;
+        if(!t.closest) return;
+        if(t.closest('a,button,.dots-trigger')){cursor.classList.remove('on-text');dot.classList.remove('on-text');return;}
+        if(t.classList.contains('gc')||t.closest('.footer-copy,.hero-tag,.panel-label,.snake-ph-label,.sb-label')){
+          cursor.classList.add('on-text');dot.classList.add('on-text');
+        }
       });
       document.addEventListener('mouseout',function(e){
-        if(e.target.closest(textEls)&&!e.relatedTarget?.closest(textEls)){cursor.classList.remove('on-text');dot.classList.remove('on-text');}
+        var r=e.relatedTarget;
+        if(!cursor.classList.contains('on-text')) return;
+        if(!r||!r.closest||(!(r.classList&&r.classList.contains('gc'))&&!r.closest('.footer-copy,.hero-tag,.panel-label,.snake-ph-label,.sb-label'))||r.closest('a,button,.dots-trigger')){
+          cursor.classList.remove('on-text');dot.classList.remove('on-text');
+        }
       });
       document.querySelectorAll('a,button,.dots-trigger,.commit-item,.avatar').forEach(function(el){
         el.addEventListener('mouseenter',function(){cursor.classList.add('on-link');});
