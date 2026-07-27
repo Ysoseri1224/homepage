@@ -1,55 +1,115 @@
 ---
 import '../styles/global.css';
-import ThemeToggle from '../components/ThemeToggle.astro';
-import LangSwitch from '../components/LangSwitch.astro';
-import SubdomainNav from '../components/SubdomainNav.astro';
 
 interface Props {
-  title: string;
+  title?: string;
   lang?: string;
 }
 
-const { title, lang = 'zh' } = Astro.props;
+const { title = 'ysoseri', lang = 'zh' } = Astro.props;
+const otherLang = lang === 'zh' ? 'en' : 'zh';
+const otherLangLabel = lang === 'zh' ? 'EN' : '中';
 ---
 
 <!doctype html>
-<html lang={lang} data-theme="light">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Why so serious?</title>
+    <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
     <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.dataset.theme = stored || preferred;
+      (function(){
+        const s=localStorage.getItem('theme');
+        const p=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+        document.documentElement.dataset.theme=s||p;
       })();
     </script>
   </head>
-  <body class="min-h-screen">
-    <!-- 噪点覆盖层 -->
-    <div class="fixed inset-0 pointer-events-none z-50" style="opacity: var(--noise-opacity)">
-      <svg width="100%" height="100%">
-        <filter id="noise">
-          <feTurbulence baseFrequency="0.7" numOctaves="4" type="fractalNoise" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#noise)" />
-      </svg>
-    </div>
+  <body>
+    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
+    <div class="spotlight" id="spot"></div>
 
-    <!-- 右上角控件 -->
-    <header class="fixed top-6 right-6 z-40 flex items-center gap-4">
-      <LangSwitch lang={lang} />
-      <ThemeToggle />
-      <SubdomainNav lang={lang} />
-    </header>
+    <nav>
+      <a class="logo" href={`/${lang}/`}>ysoseri</a>
+      <div class="nav-right">
+        <div class="dots-wrap">
+          <div class="dots-trigger" id="dots-btn">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="dots-flyout" id="dflyout">
+            <a class="flyout-item" href="https://luckyrong.ysoseri.us" target="_blank">
+              <span class="flyout-name">luckyrong.ysoseri.us</span>
+              <span class="flyout-desc">情侣空间 · 共同记录</span>
+            </a>
+            <a class="flyout-item" href="#">
+              <span class="flyout-name">blog.ysoseri.us</span>
+              <span class="flyout-desc">文字 · 技术与生活 <span style="color:var(--t3);font-size:10px;">soon</span></span>
+            </a>
+            <a class="flyout-item" href="#">
+              <span class="flyout-name">tools.ysoseri.us</span>
+              <span class="flyout-desc">小工具集合 <span style="color:var(--t3);font-size:10px;">soon</span></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="nav-sep"></div>
+        <a class="nav-btn" href={`/${otherLang}/`}>{otherLangLabel}</a>
+        <div class="nav-sep"></div>
+        <button class="nav-btn" id="theme-btn">☀ / ☾</button>
+      </div>
+    </nav>
 
     <slot />
+
+    <footer class="page-footer">
+      <div class="footer-copy">© 2026 · ysoseri.us</div>
+      <div class="footer-copy">Built on Cloudflare</div>
+    </footer>
+
+    <script is:inline>
+      const cursor = document.getElementById('cursor');
+      const dot = document.getElementById('cursor-dot');
+      const spot = document.getElementById('spot');
+      let mx=0,my=0,cx=0,cy=0;
+
+      document.addEventListener('mousemove',function(e){
+        mx=e.clientX; my=e.clientY;
+        dot.style.left=mx+'px'; dot.style.top=my+'px';
+        spot.style.left=mx+'px'; spot.style.top=my+'px';
+      });
+
+      function lerp(a,b,t){return a+(b-a)*t;}
+      (function anim(){
+        cx=lerp(cx,mx,.12); cy=lerp(cy,my,.12);
+        cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
+        requestAnimationFrame(anim);
+      })();
+
+      document.querySelectorAll('p,li,.hero-desc,.hero-name,.commit-msg,.blog-title,.ql-text,.flyout-name').forEach(function(el){
+        el.addEventListener('mouseenter',function(){cursor.classList.add('on-text');});
+        el.addEventListener('mouseleave',function(){cursor.classList.remove('on-text');});
+      });
+      document.querySelectorAll('a,button,.dots-trigger,.commit-item,.avatar').forEach(function(el){
+        el.addEventListener('mouseenter',function(){cursor.classList.add('on-link');});
+        el.addEventListener('mouseleave',function(){cursor.classList.remove('on-link');});
+      });
+
+      document.getElementById('dots-btn').addEventListener('click',function(){
+        document.getElementById('dflyout').classList.toggle('open');
+      });
+      document.addEventListener('click',function(e){
+        if(!e.target.closest('.dots-wrap')) document.getElementById('dflyout').classList.remove('open');
+      });
+
+      document.getElementById('theme-btn').addEventListener('click',function(){
+        const t=document.documentElement.dataset.theme==='dark'?'light':'dark';
+        document.documentElement.dataset.theme=t;
+        localStorage.setItem('theme',t);
+      });
+    </script>
   </body>
 </html>

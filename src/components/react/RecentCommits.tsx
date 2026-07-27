@@ -1,75 +1,88 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Commit {
+  msg: string;
   repo: string;
-  message: string;
-  time: string;
+  ago: string;
 }
 
-function relativeTime(dateStr: string, lang: string): string {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  const hours = Math.floor(diff / 3600000);
-  const days = Math.floor(diff / 86400000);
-
-  if (lang === 'zh') {
-    if (mins < 60) return `${mins} 分钟前`;
-    if (hours < 24) return `${hours} 小时前`;
-    return `${days} 天前`;
-  }
-  if (mins < 60) return `${mins}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  return `${days}d ago`;
+function timeAgo(iso: string): string {
+  const diff = Date.now() - new Date(iso).getTime();
+  const h = Math.floor(diff / 3600000);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  if (d < 30) return `${d}d ago`;
+  return `${Math.floor(d / 30)}mo ago`;
 }
 
-export default function RecentCommits({ lang = 'zh' }: { lang?: string }) {
+export default function RecentCommits() {
   const [commits, setCommits] = useState<Commit[]>([]);
   const [loading, setLoading] = useState(true);
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('https://api.github.com/users/Ysoseri1224/events?per_page=10')
-      .then((r) => (r.ok ? r.json() : []))
+    fetch('https://api.github.com/users/Ysoseri1224/events?per_page=30')
+      .then(r => r.json())
       .then((events: any[]) => {
-        const pushes = events
-          .filter((e) => e.type === 'PushEvent')
-          .flatMap((e) =>
-            e.payload.commits.map((c: any) => ({
-              repo: e.repo.name.split('/')[1],
-              message: c.message.split('\n')[0],
-              time: e.created_at,
-            }))
-          )
-          .slice(0, 5);
-        setCommits(pushes);
+        const items: Commit[] = [];
+        for (const ev of events) {
+          if (ev.type !== 'PushEvent') continue;
+          for (const c of (ev.payload?.commits || [])) {
+            items.push({ msg: c.message.split('\n')[0], repo: ev.repo.name.split('/')[1], ago: timeAgo(ev.created_at) });
+            if (items.length >= 4) break;
+          }
+          if (items.length >= 4) break;
+        }
+        setCommits(items);
       })
       .catch(() => setCommits([]))
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => {
+    if (loading || !listRef.current) return;
+    const items = listRef.current.querySelectorAll('.commit-item');
+    items.forEach((el, i) => {
+      const e = el as HTMLElement;
+      e.style.opacity = '0';
+      e.style.transform = 'translateY(5px)';
+      e.style.transition = `opacity .4s ${i * 70}ms ease,transform .4s cubic-bezier(0.16,1,0.3,1) ${i * 70}ms`;
+      setTimeout(() => { e.style.opacity = '1'; e.style.transform = 'translateY(0)'; }, 80);
+    });
+  }, [loading]);
+
   if (loading) {
     return (
-      <div className="space-y-2">
-        {[...Array(3)].map((_, i) => (
-          <div key={i} className="h-4 rounded bg-[var(--color-border)] animate-pulse" style={{ width: `${70 - i * 10}%` }} />
+      <div className="commit-list">
+        {[0,1,2,3].map(i => (
+          <div key={i} className="commit-item">
+            <div className="commit-skeleton" style={{ width: `${60 + i * 8}%`, marginBottom: '4px' }} />
+            <div className="commit-skeleton" style={{ width: '40%' }} />
+          </div>
         ))}
       </div>
     );
   }
 
-  if (commits.length === 0) {
-    return <p className="text-sm text-[var(--color-text-muted)]">...</p>;
+  if (!commits.length) {
+    return (
+      <div className="commit-list">
+        <div className="commit-item">
+          <div className="commit-msg">···</div>
+          <div className="commit-meta">no recent activity</div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <ul className="space-y-2">
+    <div className="commit-list" ref={listRef}>
       {commits.map((c, i) => (
-        <li key={i} className="text-sm leading-snug">
-          <span className="text-[var(--color-text-muted)]">{c.repo}</span>
-          <span className="mx-1.5 text-[var(--color-border)]">·</span>
-          <span className="text-[var(--color-text-secondary)]">{c.message.slice(0, 50)}</span>
-          <span className="ml-2 text-xs text-[var(--color-text-muted)]">{relativeTime(c.time, lang)}</span>
-        </li>
+        <div key={i} className="commit-item">
+          <div className="commit-msg">{c.msg}</div>
+          <div className="commit-meta">{c.ago} · {c.repo}</div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }

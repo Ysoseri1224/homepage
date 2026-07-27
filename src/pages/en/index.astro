@@ -1,42 +1,102 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Identity from '../../components/Identity.astro';
-import ProjectCard from '../../components/react/ProjectCard';
-import AnimatedSection from '../../components/react/AnimatedSection';
 import RecentCommits from '../../components/react/RecentCommits';
-import en from '../../i18n/en';
 ---
 
-<Layout title={en.title} lang="en">
-  <main class="mx-auto max-w-3xl px-6">
-    <Identity lang="en" />
+<Layout title="ysoseri" lang="en">
+  <div class="page-wrap">
 
-    <!-- Projects -->
-    <section class="pb-16">
-      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
-        {en.projects.heading}
-      </h2>
-      <div class="space-y-1">
-        {en.projects.items.map((project, i) => (
-          <AnimatedSection client:visible delay={i * 0.06}>
-            <ProjectCard
-              client:visible
-              name={project.name}
-              description={project.description}
-              tags={project.tags}
-              url={project.url}
-            />
-          </AnimatedSection>
-        ))}
+    <!-- hero: 3 cols -->
+    <div class="hero">
+      <div class="avatar">
+        <img src="/logo.jpg" alt="ysoseri" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
       </div>
-    </section>
 
-    <!-- Recent Activity -->
-    <section class="pb-20">
-      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
-        {en.commits.heading}
-      </h2>
-      <RecentCommits client:visible lang="en" />
-    </section>
-  </main>
+      <div class="hero-bio">
+        <div class="hero-name">ysoseri</div>
+        <div class="hero-desc">Writing code, doing grad school, sometimes staring into space. Building things that are interesting or useless or both.</div>
+        <div class="hero-meta">
+          <div class="hero-tag">📍 <b>Auckland</b> → TBD</div>
+          <div class="hero-tag">🎓 MInfoTech @ UoA</div>
+        </div>
+      </div>
+
+      <div class="commit-panel">
+        <div class="panel-label">Recent commits</div>
+        <RecentCommits client:visible />
+      </div>
+    </div>
+
+    <!-- snake contribution -->
+    <div class="snake-section">
+      <div class="snake-ph">
+        <div class="snake-ph-label">Contributions</div>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="/github-snake-dark.svg" />
+          <img class="snake-img" src="/github-snake-light.svg" alt="GitHub contribution snake" onerror="this.parentElement.parentElement.innerHTML='<div class=\'snake-ph-inner\'>Loading contribution graph…</div>'" />
+        </picture>
+      </div>
+    </div>
+
+    <!-- main grid: md-area + sidebar -->
+    <div class="main-grid">
+      <div class="md-area">
+        <div class="panel-label" style="margin-bottom:1.25rem">About</div>
+        <div class="md-content">
+          <h2>Background</h2>
+          <p>B.Sc. Computer Science, Qilu Normal University. Currently an MInfoTech student at the University of Auckland (GPA 5.75), focusing on security engineering, machine learning, and software tools.</p>
+          <h2>Currently</h2>
+          <p>Grad school in Auckland. Building personal projects on the side. Planning to stay in NZ or move to another English-speaking city for full-stack or security work after graduation.</p>
+          <h2>Technical</h2>
+          <ul>
+            <li>Full-Stack: MERN, FastAPI, Django, Flask — end-to-end delivery from requirements to deployment</li>
+            <li>Cybersecurity: 1st Prize national security competition (2023); web vuln analysis, penetration testing, network defence</li>
+            <li>Databases: MySQL, PostgreSQL, SQLite, MongoDB, Oracle — relational and non-relational</li>
+            <li>AI-Augmented Dev: Windsurf, Cursor, Claude, ChatGPT — accelerating delivery and debugging</li>
+          </ul>
+          <h2>Selected projects</h2>
+          <ul>
+            <li><code>course-schedule</code> — Full-stack scheduling system for an IELTS institution (MERN), independently delivered</li>
+            <li><code>CET-6-training-camp</code> — Vocabulary trainer for the CET-6 exam, Vite + React, on CF Pages</li>
+            <li><code>together-time-app</code> — Couples interaction app, esbuild + CF Worker + D1</li>
+            <li><code>Visual-Data-Analysis</code> — Video platform data visualisation, FastAPI + frontend, 92/100 final year project</li>
+          </ul>
+          <div class="md-note">Source: cv.md · ysoseri.us</div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div>
+          <div class="sb-label">Latest post</div>
+          <a class="blog-card" href="https://blog.ysoseri.us" target="_blank">
+            <div class="blog-title">Blog coming soon…</div>
+            <div class="blog-date">blog.ysoseri.us · soon</div>
+          </a>
+        </div>
+        <div>
+          <div class="sb-label">Quick access</div>
+          <div class="quick-links">
+            <a class="quick-link ql-accent" href="https://github.com/Ysoseri1224" target="_blank">
+              <span class="ql-text">GitHub</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/CET-6-training-camp" target="_blank">
+              <span class="ql-text">CET-6-training-camp</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/Fully-Auto-Docx-Format-Process" target="_blank">
+              <span class="ql-text">Fully-Auto-Docx</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/sub-recorder" target="_blank">
+              <span class="ql-text">sub-recorder</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/together-time-app" target="_blank">
+              <span class="ql-text">together-time-app</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/course-kb-skill" target="_blank">
+              <span class="ql-text">course-kb-skill</span><span class="ql-arr">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>

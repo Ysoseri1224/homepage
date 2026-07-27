@@ -1,42 +1,102 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Identity from '../../components/Identity.astro';
-import ProjectCard from '../../components/react/ProjectCard';
-import AnimatedSection from '../../components/react/AnimatedSection';
 import RecentCommits from '../../components/react/RecentCommits';
-import zh from '../../i18n/zh';
 ---
 
-<Layout title={zh.title} lang="zh">
-  <main class="mx-auto max-w-3xl px-6">
-    <Identity lang="zh" />
+<Layout title="ysoseri" lang="zh">
+  <div class="page-wrap">
 
-    <!-- 项目列表 -->
-    <section class="pb-16">
-      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
-        {zh.projects.heading}
-      </h2>
-      <div class="space-y-1">
-        {zh.projects.items.map((project, i) => (
-          <AnimatedSection client:visible delay={i * 0.06}>
-            <ProjectCard
-              client:visible
-              name={project.name}
-              description={project.description}
-              tags={project.tags}
-              url={project.url}
-            />
-          </AnimatedSection>
-        ))}
+    <!-- hero: 3 cols -->
+    <div class="hero">
+      <div class="avatar">
+        <img src="/logo.jpg" alt="ysoseri" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
       </div>
-    </section>
 
-    <!-- GitHub 最近动态 -->
-    <section class="pb-20">
-      <h2 class="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wide mb-6">
-        {zh.commits.heading}
-      </h2>
-      <RecentCommits client:visible lang="zh" />
-    </section>
-  </main>
+      <div class="hero-bio">
+        <div class="hero-name">ysoseri</div>
+        <div class="hero-desc">在奥克兰写代码、读研、偶尔发呆。做一些有趣的或没用的东西。相信好的工具应该是安静的。</div>
+        <div class="hero-meta">
+          <div class="hero-tag">📍 <b>奥克兰</b> → 待定</div>
+          <div class="hero-tag">🎓 信息技术硕士 @ UoA</div>
+        </div>
+      </div>
+
+      <div class="commit-panel">
+        <div class="panel-label">Recent commits</div>
+        <RecentCommits client:visible />
+      </div>
+    </div>
+
+    <!-- snake contribution -->
+    <div class="snake-section">
+      <div class="snake-ph">
+        <div class="snake-ph-label">Contributions</div>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="/github-snake-dark.svg" />
+          <img class="snake-img" src="/github-snake-light.svg" alt="GitHub contribution snake" onerror="this.parentElement.parentElement.innerHTML='<div class=\'snake-ph-inner\'>贡献动画生成中……</div>'" />
+        </picture>
+      </div>
+    </div>
+
+    <!-- main grid: md-area + sidebar -->
+    <div class="main-grid">
+      <div class="md-area">
+        <div class="panel-label" style="margin-bottom:1.25rem">About</div>
+        <div class="md-content">
+          <h2>Background</h2>
+          <p>奇鲁师范大学计算机科学与技术（师范）本科毕业，现于奥克兰大学攻读信息技术硕士（GPA 5.75）。主修方向涵盖网络安全与隐私工程、机器学习、软件工程。</p>
+          <h2>Currently</h2>
+          <p>奥克兰大学在读研究生，同时维护若干个人项目。计划毕业后留在新西兰或前往其他英语系城市从事全栈/安全相关工作。</p>
+          <h2>Technical</h2>
+          <ul>
+            <li>全栈开发：MERN stack、FastAPI、Django、Flask；完整交付能力，从需求到部署</li>
+            <li>网络安全：全国大学生信息安全竞赛一等奖（2023）；Web 漏洞分析、渗透测试、网络防御</li>
+            <li>数据库：MySQL、PostgreSQL、SQLite、MongoDB、Oracle；关系型与非关系型均熟悉</li>
+            <li>AI 辅助开发：Windsurf、Cursor、Claude、ChatGPT；AI 加速全栈交付与调试</li>
+          </ul>
+          <h2>Selected projects</h2>
+          <ul>
+            <li><code>course-schedule</code> — 为 IELTS 培训机构独立交付的全栈排课系统（MERN）</li>
+            <li><code>CET-6-training-camp</code> — 六级词汇训练营，Vite + React，部署于 CF Pages</li>
+            <li><code>together-time-app</code> — 情侣互动小应用，esbuild + CF Worker + D1</li>
+            <li><code>Visual-Data-Analysis</code> — 视频平台数据可视化，FastAPI + 前端，本科毕设 92/100</li>
+          </ul>
+          <div class="md-note">内容来源：cv.md · ysoseri.us</div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div>
+          <div class="sb-label">Latest post</div>
+          <a class="blog-card" href="https://blog.ysoseri.us" target="_blank">
+            <div class="blog-title">博客建设中……</div>
+            <div class="blog-date">blog.ysoseri.us · soon</div>
+          </a>
+        </div>
+        <div>
+          <div class="sb-label">Quick access</div>
+          <div class="quick-links">
+            <a class="quick-link ql-accent" href="https://github.com/Ysoseri1224" target="_blank">
+              <span class="ql-text">GitHub</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/CET-6-training-camp" target="_blank">
+              <span class="ql-text">CET-6-training-camp</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/Fully-Auto-Docx-Format-Process" target="_blank">
+              <span class="ql-text">Fully-Auto-Docx</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/sub-recorder" target="_blank">
+              <span class="ql-text">sub-recorder</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/together-time-app" target="_blank">
+              <span class="ql-text">together-time-app</span><span class="ql-arr">↗</span>
+            </a>
+            <a class="quick-link" href="https://github.com/Ysoseri1224/course-kb-skill" target="_blank">
+              <span class="ql-text">course-kb-skill</span><span class="ql-arr">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
