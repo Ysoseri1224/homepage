@@ -116,3 +116,88 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.6rem
 /* loading placeholder */
 .commit-skeleton{height:11px;border-radius:4px;background:var(--sf2);animation:pulse 1.4s ease infinite;}
 @keyframes pulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+/* 移动端适配 */
+@media (pointer: coarse) {
+  body { cursor: auto !important; }
+  #cursor, #cursor-dot, .spotlight { display: none !important; }
+  .gc { opacity: 1 !important; color: inherit !important; }
+  .gc.glow { color: var(--ac) !important; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .page-wrap { padding: 0 1.5rem; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 0 0;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+  }
+
+  .hero-bio {
+    text-align: center;
+    padding-top: 0;
+  }
+
+  .hero-name {
+    font-size: 1.75rem;
+  }
+
+  .hero-desc {
+    max-width: 100%;
+    font-size: 15px;
+  }
+
+  .hero-meta {
+    justify-content: center;
+  }
+
+  .commit-panel {
+    min-width: auto;
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .panel-label, .sb-label {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .snake-section {
+    margin: 2.5rem 0 0;
+    padding: 2rem 0;
+  }
+
+  .snake-ph-label {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .md-area {
+    padding: 2rem 0;
+  }
+
+  .sidebar {
+    padding: 2rem 0;
+    gap: 2.5rem;
+  }
+
+  .page-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem 1.5rem 0;
+    text-align: center;
+  }
+}

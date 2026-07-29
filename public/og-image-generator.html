@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Image Generator - ysoseri</title>
+  <style>
+    @font-face {
+      font-family: 'Geist';
+      src: url('/fonts/geist-variable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Instrument Serif';
+      src: url('/fonts/instrument-serif-regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1a1410;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Geist', sans-serif;
+      color: #f0e8dc;
+    }
+
+    .instructions {
+      max-width: 1200px;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: rgba(255,235,210,0.05);
+      border: 1px solid rgba(255,235,210,0.1);
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #a89880;
+    }
+
+    .instructions h3 {
+      margin-bottom: 0.75rem;
+      color: #f0e8dc;
+      font-size: 16px;
+    }
+
+    .instructions ol {
+      padding-left: 1.5rem;
+    }
+
+    .instructions li {
+      margin-bottom: 0.5rem;
+    }
+
+    .instructions code {
+      background: rgba(212,94,58,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #d45e3a;
+      font-family: 'SF Mono', monospace;
+      font-size: 13px;
+    }
+
+    .og-card {
+      width: 1200px;
+      height: 630px;
+      background: #f5f0e8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    .og-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .og-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid rgba(184,82,46,0.2);
+      box-shadow: 0 8px 24px rgba(184,82,46,0.15);
+      object-fit: cover;
+      background: #ede8df;
+    }
+
+    .og-name {
+      font-family: 'Geist', sans-serif;
+      font-size: 72px;
+      font-weight: 500;
+      color: #2a221a;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .og-slogan {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      color: #b8522e;
+      font-style: italic;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .og-decoration {
+      position: absolute;
+      bottom: 40px;
+      right: 50px;
+      font-size: 14px;
+      color: #b0a090;
+      letter-spacing: 0.1em;
+      font-family: 'Geist', sans-serif;
+    }
+
+    .scale-note {
+      margin-top: 1rem;
+      font-size: 13px;
+      color: #6a5a48;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">
+    <h3>📸 截图步骤：</h3>
+    <ol>
+      <li>确保浏览器窗口足够大（至少 1200px 宽）</li>
+      <li>使用浏览器开发者工具（F12）或截图工具，截取下方卡片</li>
+      <li>确保截图尺寸为 <code>1200×630</code> 像素</li>
+      <li>保存为 <code>og-image.jpg</code>，放到 <code>public/</code> 目录</li>
+      <li>提交到 GitHub，部署后 <code>https://ysoseri.us/og-image.jpg</code> 生效</li>
+    </ol>
+  </div>
+
+  <div class="og-card">
+    <img class="og-avatar" src="/logo.jpg" alt="ysoseri avatar" />
+    <div class="og-content">
+      <h1 class="og-name">ysoseri</h1>
+      <p class="og-slogan">Why so serious?</p>
+    </div>
+    <div class="og-decoration">YSOSERI.US</div>
+  </div>
+
+  <p class="scale-note">如果卡片显示过大/过小，调整浏览器缩放比例到 100%</p>
+</body>
+</html>

@@ -17,6 +17,16 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
+    <meta property="og:title" content="ysoseri · 个人主页" />
+    <meta property="og:description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
+    <meta property="og:image" content="https://ysoseri.us/og-image.png" />
+    <meta property="og:url" content="https://ysoseri.us" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ysoseri · 个人主页" />
+    <meta name="twitter:description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
+    <meta name="twitter:image" content="https://ysoseri.us/og-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet" />
@@ -85,6 +95,16 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
       var glowEls=document.querySelectorAll('.page-wrap, nav, .page-footer');
       var glowR=40;
       var glowSpans=[];
+      var visibleSpans=new Set();
+
+      // IntersectionObserver 粗筛：只追踪视口内的 span
+      var io=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting) visibleSpans.add(e.target);
+          else visibleSpans.delete(e.target);
+        });
+      },{rootMargin:'100px'});
+
       function splitText(root){
         var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
         var textNodes=[];
@@ -98,6 +118,7 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
             s.className='gc';
             frag.appendChild(s);
             glowSpans.push(s);
+            io.observe(s);
           }
           n.parentNode.replaceChild(frag,n);
         });
@@ -107,29 +128,38 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
         muts.forEach(function(m){
           m.addedNodes.forEach(function(n){
             if(n.nodeType===1){
-              if(n.classList&&n.classList.contains('gc')) glowSpans.push(n);
-              else n.querySelectorAll&&n.querySelectorAll('.gc').forEach(function(s){glowSpans.push(s);});
+              if(n.classList&&n.classList.contains('gc')){
+                glowSpans.push(n);
+                io.observe(n);
+              }
+              else if(n.querySelectorAll){
+                n.querySelectorAll('.gc').forEach(function(s){
+                  glowSpans.push(s);
+                  io.observe(s);
+                });
+              }
             }
           });
         });
       }).observe(document.querySelector('.page-wrap'),{childList:true,subtree:true});
+
       function updateGlow(){
-        for(var i=0;i<glowSpans.length;i++){
-          var r=glowSpans[i].getBoundingClientRect();
-          if(r.width===0) continue;
+        visibleSpans.forEach(function(span){
+          var r=span.getBoundingClientRect();
+          if(r.width===0) return;
           var cx2=r.left+r.width/2;
           var cy2=r.top+r.height/2;
           var dist=Math.sqrt((mx-cx2)*(mx-cx2)+(my-cy2)*(my-cy2));
-          if(dist<glowR) glowSpans[i].classList.add('glow');
-          else glowSpans[i].classList.remove('glow');
-        }
+          if(dist<glowR) span.classList.add('glow');
+          else span.classList.remove('glow');
+        });
         requestAnimationFrame(updateGlow);
       }
       updateGlow();
 
       function lerp(a,b,t){return a+(b-a)*t;}
       (function anim(){
-        cx=lerp(cx,mx,.12); cy=lerp(cy,my,.12);
+        cx=lerp(cx,mx,.3); cy=lerp(cy,my,.3);
         cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
         requestAnimationFrame(anim);
       })();
