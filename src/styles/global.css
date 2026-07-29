@@ -83,7 +83,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.6rem
 /* main grid */
 .main-grid{display:grid;grid-template-columns:1fr 260px;gap:4rem;}
 .md-area{padding:3.5rem 0;}
-.md-content{font-family:'Instrument Serif','Noto Serif SC',serif;font-size:17px;line-height:1.95;color:var(--t1);max-width:58ch;}
+.md-content{font-family:'Geist','Noto Sans SC',sans-serif;font-size:17px;line-height:1.95;color:var(--t1);max-width:58ch;}
 .md-content h2{font-family:'Geist','Noto Sans SC',sans-serif;font-size:18px;font-weight:500;color:var(--t3);letter-spacing:.08em;margin:3rem 0 1rem;}
 .md-content h2:first-child{margin-top:0;}
 .md-content p{color:var(--t2);margin-bottom:1rem;}
