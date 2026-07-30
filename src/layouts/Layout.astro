@@ -9,6 +9,11 @@ interface Props {
 const { title = 'why so serious', lang = 'zh' } = Astro.props;
 const otherLang = lang === 'zh' ? 'en' : 'zh';
 const otherLangLabel = lang === 'zh' ? 'EN' : '中';
+const isZh = lang === 'zh';
+const description = isZh
+  ? 'ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，记录技术、生活和思考。'
+  : 'The personal homepage of ysoseri, a full-stack developer and Master of Information Technology student at the University of Auckland.';
+const canonicalUrl = `https://ysoseri.us/${lang}/`;
 ---
 
 <!doctype html>
@@ -17,15 +22,22 @@ const otherLangLabel = lang === 'zh' ? 'EN' : '中';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta name="description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
-    <meta property="og:title" content="ysoseri · 个人主页" />
-    <meta property="og:description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="zh-CN" href="https://ysoseri.us/zh/" />
+    <link rel="alternate" hreflang="en" href="https://ysoseri.us/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://ysoseri.us/zh/" />
+    <meta property="og:title" content={isZh ? 'ysoseri · 个人主页' : 'ysoseri · Personal homepage'} />
+    <meta property="og:description" content={description} />
     <meta property="og:image" content="https://ysoseri.us/og-image.png" />
-    <meta property="og:url" content="https://ysoseri.us" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content={isZh ? 'zh_CN' : 'en_US'} />
+    <meta property="og:locale:alternate" content={isZh ? 'en_US' : 'zh_CN'} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="ysoseri · 个人主页" />
-    <meta name="twitter:description" content="ysoseri 的个人主页——全栈开发者，奥克兰大学信息技术硕士在读，Claude 深度用户。记录技术、生活和思考。" />
+    <meta name="twitter:title" content={isZh ? 'ysoseri · 个人主页' : 'ysoseri · Personal homepage'} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://ysoseri.us/og-image.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
