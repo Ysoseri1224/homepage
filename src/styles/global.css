@@ -99,8 +99,8 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:1.6rem
 .blog-card::after{content:'';position:absolute;inset:0;background:var(--acm);opacity:0;transition:opacity .2s;pointer-events:none;}
 .blog-card:hover{border-color:var(--bdh);transform:translateY(-2px);}
 .blog-card:hover::after{opacity:1;}
-.blog-title{font-size:15px;color:var(--t1);line-height:1.5;margin-bottom:.4rem;position:relative;z-index:1;}
-.blog-date{font-size:13px;color:var(--t3);position:relative;z-index:1;}
+.blog-title{font-size:15px;color:var(--t1);line-height:1.5;margin-bottom:.45rem;position:relative;z-index:1;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
+.blog-description{font-size:13px;color:var(--t3);line-height:1.55;position:relative;z-index:1;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;}
 .quick-links{display:flex;flex-direction:column;gap:3px;}
 .quick-link{display:flex;align-items:center;justify-content:space-between;padding:.65rem .75rem;border-radius:7px;border:0.5px solid transparent;text-decoration:none;transition:border-color .15s,background .15s,transform .18s var(--sp);}
 .quick-link:hover{border-color:var(--bdh);background:var(--sf);transform:translateX(3px);}

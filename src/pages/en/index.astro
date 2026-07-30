@@ -1,6 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import RecentCommits from '../../components/react/RecentCommits';
+import RecentThought from '../../components/react/RecentThought';
+import { fetchRecentBlogPost } from '../../lib/recentBlog';
+
+const recentPost = await fetchRecentBlogPost();
 ---
 
 <Layout title="why so serious" lang="en">
@@ -67,10 +71,7 @@ import RecentCommits from '../../components/react/RecentCommits';
       <div class="sidebar">
         <div>
           <div class="sb-label">Recent thoughts</div>
-          <a class="blog-card" href="https://blog.ysoseri.us" target="_blank">
-            <div class="blog-title">Blog coming soon…</div>
-            <div class="blog-date">blog.ysoseri.us · soon</div>
-          </a>
+          <RecentThought lang="en" initialPost={recentPost} client:load />
         </div>
         <div>
           <div class="sb-label">Quick access</div>
