@@ -39,6 +39,9 @@ const canonicalUrl = `https://ysoseri.us/${lang}/`;
     <meta name="twitter:title" content={isZh ? 'ysoseri · 个人主页' : 'ysoseri · Personal homepage'} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://ysoseri.us/og-image.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@400;500&display=swap" rel="stylesheet" />
@@ -56,7 +59,10 @@ const canonicalUrl = `https://ysoseri.us/${lang}/`;
     <div class="spotlight" id="spot"></div>
 
     <nav>
-      <a class="logo" href={`/${lang}/`}>ysoseri</a>
+      <a class="logo" href={`/${lang}/`}>
+        <span class="brand-glyph" aria-hidden="true"></span>
+        <span>ysoseri</span>
+      </a>
       <div class="nav-right">
         <div class="dots-wrap">
           <div class="dots-trigger" id="dots-btn">

@@ -33,8 +33,9 @@ body{cursor:none;font-family:'Geist','Noto Sans SC',sans-serif;background:var(--
 .spotlight{pointer-events:none;position:fixed;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(196,96,58,0.055) 0%,transparent 70%);transform:translate(-50%,-50%);z-index:0;left:-999px;top:-999px;transition:left .06s,top .06s;}
 [data-theme="dark"] .spotlight{background:radial-gradient(circle,rgba(224,112,80,0.09) 0%,transparent 70%);}
 nav{display:flex;align-items:center;justify-content:space-between;padding:1.6rem 3.5rem;position:sticky;top:0;background:var(--bg);background-image:var(--noise);z-index:20;border-bottom:0.5px solid var(--bd);}
-.logo{font-family:'Geist',sans-serif;font-size:18px;font-weight:500;color:var(--t1);letter-spacing:-.02em;text-decoration:none;transition:color .2s;}
+.logo{display:flex;align-items:center;gap:8px;font-family:'Geist',sans-serif;font-size:18px;font-weight:500;color:var(--t1);letter-spacing:-.02em;text-decoration:none;transition:color .2s;}
 .logo:hover{color:var(--ac);}
+.brand-glyph{display:block;width:26px;height:26px;flex:none;background:var(--ac);-webkit-mask:url('/yso-wordmark-mask.png') center/contain no-repeat;mask:url('/yso-wordmark-mask.png') center/contain no-repeat;}
 .nav-right{display:flex;align-items:center;gap:.6rem;position:relative;}
 .nav-btn{font-size:13px;font-family:'Geist',sans-serif;color:var(--t3);background:none;border:none;cursor:none;padding:5px 9px;border-radius:6px;transition:color .2s,background .2s;letter-spacing:.04em;text-decoration:none;display:inline-block;}
 .nav-btn:hover{color:var(--t1);background:var(--bd);}
